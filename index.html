@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sekolah Cendekia Bangsa — Pendaftaran Siswa Baru</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:wght@400;500;600&display=swap');
+
+  :root{
+    --paper: #FAF6EE;
+    --paper-line: #E4DCC8;
+    --ink: #24304A;
+    --ink-soft: #5B6478;
+    --wax: #A8402A;
+    --wax-dark: #7E2E1D;
+    --leaf: #2F6B4F;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Sans 3', sans-serif;
+    line-height:1.6;
+  }
+
+  a{ color:inherit; }
+
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* Header */
+  header{
+    border-bottom:1px solid var(--paper-line);
+    padding:20px 0;
+    position:sticky;
+    top:0;
+    background:rgba(250,246,238,0.92);
+    backdrop-filter:blur(4px);
+    z-index:10;
+  }
+
+  header .wrap{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+  }
+
+  header h1{
+    font-family:'Lora', serif;
+    font-weight:600;
+    font-size:1.25rem;
+    margin:0;
+  }
+
+  header nav ul{
+    list-style:none;
+    display:flex;
+    gap:26px;
+    margin:0;
+    padding:0;
+  }
+
+  header nav a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-size:0.95rem;
+  }
+  header nav a:hover, header nav a:focus-visible{ color:var(--ink); }
+
+  .btn-daftar{
+    background:var(--wax);
+    color:#fff !important;
+    padding:8px 18px;
+    border-radius:2px;
+    text-decoration:none !important;
+    font-size:0.92rem;
+  }
+  .btn-daftar:hover{ background:var(--wax-dark); }
+
+  /* Hero */
+  #home{
+    padding:76px 0 64px;
+  }
+
+  .hero{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+  }
+
+  .hero .eyebrow{
+    color:var(--wax-dark);
+    font-family:'Lora', serif;
+    font-size:0.95rem;
+    margin:0 0 14px;
+  }
+
+  .hero h2{
+    font-family:'Lora', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:2.6rem;
+    line-height:1.18;
+    margin:0 0 20px;
+    max-width:15ch;
+  }
+
+  .hero p{
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin:0 0 28px;
+    font-size:1.05rem;
+  }
+
+  .hero .cta-row{
+    display:flex;
+    align-items:center;
+    gap:20px;
+  }
+
+  .btn-primary{
+    display:inline-block;
+    background:var(--wax);
+    color:#fff;
+    padding:13px 28px;
+    border-radius:2px;
+    text-decoration:none;
+    font-size:1rem;
+  }
+  .btn-primary:hover{ background:var(--wax-dark); }
+
+  .btn-secondary{
+    color:var(--ink);
+    text-decoration:underline;
+    text-decoration-color:var(--paper-line);
+    text-underline-offset:4px;
+    font-size:0.98rem;
+  }
+  .btn-secondary:hover{ text-decoration-color:var(--ink); }
+
+  /* Hero illustration: an open ledger/book */
+  .hero-art{
+    display:flex;
+    justify-content:center;
+  }
+
+  .hero-art svg{ width:100%; max-width:340px; height:auto; }
+
+  /* Stats strip */
+  #stats{
+    border-top:1px solid var(--paper-line);
+    border-bottom:1px solid var(--paper-line);
+    padding:32px 0;
+  }
+
+  .stats-row{
+    display:flex;
+    justify-content:space-between;
+    text-align:left;
+  }
+
+  .stat{
+    padding:0 24px;
+    border-left:1px solid var(--paper-line);
+    flex:1;
+  }
+  .stat:first-child{ border-left:none; padding-left:0; }
+
+  .stat .num{
+    font-family:'Lora', serif;
+    font-weight:600;
+    font-size:1.9rem;
+    color:var(--wax);
+    display:block;
+  }
+  .stat .label{
+    color:var(--ink-soft);
+    font-size:0.92rem;
+  }
+
+  /* Section heading pattern */
+  section{ padding:64px 0; }
+
+  .section-head{
+    max-width:56ch;
+    margin:0 0 40px;
+  }
+
+  .section-head h3{
+    font-family:'Lora', serif;
+    font-weight:600;
+    font-size:1.7rem;
+    margin:0 0 10px;
+  }
+
+  .section-head p{ color:var(--ink-soft); margin:0; }
+
+  /* About */
+  #tentang .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+  }
+  #tentang .about-grid p{ color:var(--ink-soft); margin:0 0 16px; }
+
+  /* Jenjang - ledger list, numbered because it's a real sequence SD->SMP->SMA */
+  .jenjang-list{ list-style:none; margin:0; padding:0; }
+
+  .jenjang-item{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:24px;
+    padding:26px 0;
+    border-top:1px solid var(--paper-line);
+  }
+  .jenjang-item:last-child{ border-bottom:1px solid var(--paper-line); }
+
+  .jenjang-item .no{
+    font-family:'Lora', serif;
+    font-style:italic;
+    font-size:1.6rem;
+    color:var(--paper-line);
+  }
+
+  .jenjang-item h4{
+    font-family:'Lora', serif;
+    font-size:1.15rem;
+    margin:0 0 6px;
+  }
+  .jenjang-item p{ color:var(--ink-soft); margin:0; max-width:60ch; }
+
+  /* Kenapa memilih kami */
+  .alasan-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px 40px;
+  }
+
+  .alasan-list li{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+  }
+
+  .alasan-list .mark{
+    color:var(--leaf);
+    font-family:'Lora', serif;
+    font-size:1.1rem;
+    line-height:1.6;
+  }
+
+  .alasan-list h4{
+    font-family:'Lora', serif;
+    font-size:1.02rem;
+    margin:0 0 4px;
+  }
+  .alasan-list p{ color:var(--ink-soft); margin:0; font-size:0.96rem; }
+
+  /* CTA band */
+  #cta-band{
+    background:var(--ink);
+    color:var(--paper);
+    padding:56px 0;
+  }
+  #cta-band .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  #cta-band h3{
+    font-family:'Lora', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:1.7rem;
+    margin:0;
+    max-width:20ch;
+  }
+  #cta-band .btn-primary{ background:var(--paper); color:var(--ink); }
+  #cta-band .btn-primary:hover{ background:#fff; }
+
+  /* Footer */
+  footer{ padding:48px 0 60px; }
+
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr 1fr;
+    gap:32px;
+  }
+
+  footer h5{
+    font-family:'Lora', serif;
+    font-size:1rem;
+    margin:0 0 12px;
+  }
+  footer p, footer a{
+    color:var(--ink-soft);
+    font-size:0.94rem;
+    text-decoration:none;
+    margin:0 0 8px;
+    display:block;
+  }
+  footer a:hover{ color:var(--ink); text-decoration:underline; }
+
+  .footer-bottom{
+    margin-top:40px;
+    padding-top:20px;
+    border-top:1px solid var(--paper-line);
+    color:var(--ink-soft);
+    font-size:0.86rem;
+  }
+
+  @media (max-width: 760px){
+    .hero{ grid-template-columns:1fr; }
+    .hero-art{ order:-1; max-width:220px; margin:0 auto; }
+    .stats-row{ flex-direction:column; gap:20px; }
+    .stat{ border-left:none; padding-left:0; border-top:1px solid var(--paper-line); padding-top:16px; }
+    .stat:first-child{ border-top:none; padding-top:0; }
+    #tentang .about-grid{ grid-template-columns:1fr; }
+    .alasan-list{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; }
+    #cta-band .wrap{ flex-direction:column; align-items:flex-start; }
+    header nav ul{ gap:16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; }
+  }
+
+  :focus-visible{ outline:2px solid var(--wax); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="wrap">
+        <h1>Sekolah Cendekia Bangsa</h1>
+        <nav>
+            <ul>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#jenjang">Jenjang</a></li>
+                <li><a href="#kenapa">Kenapa Kami</a></li>
+                <li><a href="pendaftaran-sekolah.html" class="btn-daftar">Daftar</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+    <section id="home">
+        <div class="wrap hero">
+            <div>
+                <p class="eyebrow">Penerimaan Siswa Baru 2026/2027</p>
+                <h2>Tempat yang tepat untuk langkah belajar berikutnya</h2>
+                <p>Sekolah Cendekia Bangsa membuka pendaftaran untuk jenjang SD, SMP, dan SMA. Proses pendaftaran singkat, dan tim kami mendampingi dari awal hingga hari pertama sekolah.</p>
+                <div class="cta-row">
+                    <a href="pendaftaran-sekolah.html" class="btn-primary">Daftar sekarang</a>
+                    <a href="#jenjang" class="btn-secondary">Lihat jenjang pendidikan</a>
+                </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+                <svg viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M170 40 L40 70 L40 220 L170 195 Z" fill="#FEFDFB" stroke="#E4DCC8" stroke-width="2"/>
+                    <path d="M170 40 L300 70 L300 220 L170 195 Z" fill="#FEFDFB" stroke="#E4DCC8" stroke-width="2"/>
+                    <line x1="170" y1="40" x2="170" y2="195" stroke="#A8402A" stroke-width="3"/>
+                    <line x1="55" y1="95" x2="150" y2="80" stroke="#E4DCC8" stroke-width="2"/>
+                    <line x1="55" y1="120" x2="150" y2="105" stroke="#E4DCC8" stroke-width="2"/>
+                    <line x1="55" y1="145" x2="150" y2="130" stroke="#E4DCC8" stroke-width="2"/>
+                    <line x1="55" y1="170" x2="150" y2="155" stroke="#E4DCC8" stroke-width="2"/>
+                    <line x1="190" y1="80" x2="285" y2="95" stroke="#E4DCC8" stroke-width="2"/>
+                    <line x1="190" y1="105" x2="285" y2="120" stroke="#E4DCC8" stroke-width="2"/>
+                    <line x1="190" y1="130" x2="285" y2="145" stroke="#E4DCC8" stroke-width="2"/>
+                    <line x1="190" y1="155" x2="285" y2="170" stroke="#E4DCC8" stroke-width="2"/>
+                    <circle cx="170" cy="40" r="5" fill="#A8402A"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats">
+        <div class="wrap stats-row">
+            <div class="stat">
+                <span class="num">28</span>
+                <span class="label">tahun beroperasi</span>
+            </div>
+            <div class="stat">
+                <span class="num">1.240</span>
+                <span class="label">siswa aktif</span>
+            </div>
+            <div class="stat">
+                <span class="num">96%</span>
+                <span class="label">lulusan melanjutkan studi</span>
+            </div>
+            <div class="stat">
+                <span class="num">3</span>
+                <span class="label">jenjang pendidikan</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="tentang">
+        <div class="wrap">
+            <div class="section-head">
+                <h3>Tentang Sekolah Cendekia Bangsa</h3>
+            </div>
+            <div class="about-grid">
+                <p>Kami membina siswa dari jenjang SD hingga SMA dalam satu lingkungan belajar yang berkesinambungan, dengan kurikulum yang menyeimbangkan akademik, karakter, dan keterampilan praktis.</p>
+                <p>Setiap kelas dijaga dalam jumlah kecil agar guru dapat mengenal perkembangan tiap siswa secara personal, dan orang tua mendapat laporan berkala di setiap tahap belajar anak.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="jenjang">
+        <div class="wrap">
+            <div class="section-head">
+                <h3>Jenjang pendidikan</h3>
+                <p>Tiga tahap belajar yang berkelanjutan, dari dasar hingga persiapan menuju perguruan tinggi.</p>
+            </div>
+            <ul class="jenjang-list">
+                <li class="jenjang-item">
+                    <span class="no">01</span>
+                    <div>
+                        <h4>Sekolah Dasar (SD)</h4>
+                        <p>Menanamkan dasar membaca, berhitung, dan rasa ingin tahu melalui pembelajaran yang aktif dan menyenangkan.</p>
+                    </div>
+                </li>
+                <li class="jenjang-item">
+                    <span class="no">02</span>
+                    <div>
+                        <h4>Sekolah Menengah Pertama (SMP)</h4>
+                        <p>Memperluas wawasan akademik sekaligus membangun kemandirian dan kemampuan bekerja sama dalam kelompok.</p>
+                    </div>
+                </li>
+                <li class="jenjang-item">
+                    <span class="no">03</span>
+                    <div>
+                        <h4>Sekolah Menengah Atas (SMA)</h4>
+                        <p>Mempersiapkan siswa menuju perguruan tinggi melalui peminatan, bimbingan karier, dan pengalaman praktis.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="kenapa">
+        <div class="wrap">
+            <div class="section-head">
+                <h3>Kenapa memilih kami</h3>
+            </div>
+            <ul class="alasan-list">
+                <li>
+                    <span class="mark">✓</span>
+                    <div>
+                        <h4>Kelas berukuran kecil</h4>
+                        <p>Rasio guru dan siswa yang terjaga agar setiap anak mendapat perhatian yang cukup.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="mark">✓</span>
+                    <div>
+                        <h4>Laporan perkembangan rutin</h4>
+                        <p>Orang tua menerima laporan belajar setiap bulan, bukan hanya di akhir semester.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="mark">✓</span>
+                    <div>
+                        <h4>Guru berpengalaman</h4>
+                        <p>Tenaga pengajar yang terlatih dan aktif mengikuti pelatihan kurikulum terbaru.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="mark">✓</span>
+                    <div>
+                        <h4>Fasilitas lengkap</h4>
+                        <p>Perpustakaan, laboratorium, dan ruang kegiatan yang mendukung belajar di luar kelas.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="cta-band">
+        <div class="wrap">
+            <h3>Pendaftaran tahun ajaran 2026/2027 sudah dibuka</h3>
+            <a href="pendaftaran-sekolah.html" class="btn-primary">Isi formulir pendaftaran</a>
+        </div>
+    </section>
+
+</main>
+
+<footer id="kontak">
+    <div class="wrap">
+        <div class="footer-grid">
+            <div>
+                <h5>Sekolah Cendekia Bangsa</h5>
+                <p>Jl. Pendidikan No. 12, Semarang, Jawa Tengah</p>
+            </div>
+            <div>
+                <h5>Kontak</h5>
+                <a href="tel:+622412345678">(024) 1234 5678</a>
+                <a href="mailto:pendaftaran@cendekiabangsa.sch.id">pendaftaran@cendekiabangsa.sch.id</a>
+            </div>
+            <div>
+                <h5>Tautan</h5>
+                <a href="#jenjang">Jenjang pendidikan</a>
+                <a href="pendaftaran-sekolah.html">Formulir pendaftaran</a>
+            </div>
+        </div>
+        <div class="wrap footer-bottom">
+            © 2026 Sekolah Cendekia Bangsa.
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
