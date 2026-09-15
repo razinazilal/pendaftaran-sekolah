@@ -343,152 +343,6 @@
   }
 
   :focus-visible{ outline:2px solid var(--wax); outline-offset:2px; }
-
-  /* Pendaftaran */
-  .form-book{
-    background:#fff;
-    border:1px solid var(--paper-line);
-    border-radius:3px;
-    box-shadow: -6px 0 0 var(--wax);
-    padding:36px 40px 40px;
-  }
-
-  .form-book h4{
-    font-family:'Lora', serif;
-    font-weight:600;
-    font-size:1.1rem;
-    margin:0 0 4px;
-  }
-
-  .form-book .kop{
-    color:var(--ink-soft);
-    font-size:0.9rem;
-    margin:0 0 28px;
-    padding-bottom:20px;
-    border-bottom:1px dashed var(--paper-line);
-  }
-
-  .form-book fieldset{
-    border:none;
-    padding:0;
-    margin:0 0 28px;
-  }
-
-  .form-book fieldset legend{
-    font-family:'Lora', serif;
-    font-size:0.95rem;
-    font-weight:600;
-    color:var(--wax-dark);
-    padding:0 0 14px;
-    width:100%;
-    border-bottom:1px solid var(--paper-line);
-    margin-bottom:18px;
-  }
-
-  .form-book .row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-  }
-
-  .form-book .field{ margin-bottom:18px; }
-  .form-book .field.full{ grid-column: 1 / -1; }
-
-  .form-book label{
-    display:block;
-    font-size:0.88rem;
-    color:var(--ink-soft);
-    margin-bottom:6px;
-  }
-
-  .form-book input,
-  .form-book select,
-  .form-book textarea{
-    width:100%;
-    font-family:inherit;
-    font-size:0.98rem;
-    color:var(--ink);
-    padding:9px 10px;
-    border:1px solid var(--paper-line);
-    border-radius:2px;
-    background:#FEFDFB;
-  }
-
-  .form-book input:focus,
-  .form-book select:focus,
-  .form-book textarea:focus{
-    outline:2px solid var(--wax);
-    outline-offset:1px;
-    border-color:var(--wax);
-  }
-
-  .form-book textarea{ resize:vertical; min-height:70px; }
-
-  .form-book .gender-options{
-    display:flex;
-    gap:24px;
-    padding-top:4px;
-  }
-  .form-book .gender-options label{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    color:var(--ink);
-    font-size:0.95rem;
-    margin-bottom:0;
-  }
-  .form-book .gender-options input{ width:auto; }
-
-  .form-book .actions{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    margin-top:6px;
-  }
-
-  .form-book button{
-    background:var(--wax);
-    color:#fff;
-    border:none;
-    padding:12px 26px;
-    font-size:0.98rem;
-    font-family:inherit;
-    border-radius:2px;
-    cursor:pointer;
-  }
-  .form-book button:hover{ background:var(--wax-dark); }
-  .form-book button:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
-
-  .form-book .required-note{
-    font-size:0.82rem;
-    color:var(--ink-soft);
-  }
-
-  #terima-kasih{
-    display:none;
-    background:#fff;
-    border:1px solid var(--paper-line);
-    border-radius:3px;
-    box-shadow: -6px 0 0 var(--leaf);
-    padding:36px 40px;
-    margin-top:24px;
-    scroll-margin-top:90px;
-  }
-
-  #terima-kasih:target{ display:block; }
-
-  #terima-kasih h4{
-    font-family:'Lora', serif;
-    font-size:1.2rem;
-    color:var(--leaf);
-    margin:0 0 8px;
-  }
-  #terima-kasih p{ color:var(--ink-soft); margin:0; }
-
-  @media (max-width: 600px){
-    .form-book{ padding:28px 22px 32px; }
-    .form-book .row{ grid-template-columns:1fr; }
-  }
 </style>
 </head>
 <body>
@@ -501,7 +355,7 @@
                 <li><a href="#tentang">Tentang</a></li>
                 <li><a href="#jenjang">Jenjang</a></li>
                 <li><a href="#kenapa">Kenapa Kami</a></li>
-                <li><a href="#daftar" class="btn-daftar">Daftar</a></li>
+                <li><a href="pendaftaran-sekolah.html" class="btn-daftar">Daftar</a></li>
             </ul>
         </nav>
     </div>
@@ -516,7 +370,7 @@
                 <h2>Tempat yang tepat untuk langkah belajar berikutnya</h2>
                 <p>Sekolah Cendekia Bangsa membuka pendaftaran untuk jenjang SD, SMP, dan SMA. Proses pendaftaran singkat, dan tim kami mendampingi dari awal hingga hari pertama sekolah.</p>
                 <div class="cta-row">
-                    <a href="#daftar" class="btn-primary">Daftar sekarang</a>
+                    <a href="pendaftaran-sekolah.html" class="btn-primary">Daftar sekarang</a>
                     <a href="#jenjang" class="btn-secondary">Lihat jenjang pendidikan</a>
                 </div>
             </div>
@@ -645,100 +499,7 @@
     <section id="cta-band">
         <div class="wrap">
             <h3>Pendaftaran tahun ajaran 2026/2027 sudah dibuka</h3>
-            <a href="#daftar" class="btn-primary">Isi formulir pendaftaran</a>
-        </div>
-    </section>
-
-    <section id="daftar">
-        <div class="wrap">
-            <div class="section-head">
-                <h3>Formulir pendaftaran</h3>
-                <p>Lengkapi data calon siswa dan orang tua/wali di bawah ini.</p>
-            </div>
-
-            <form class="form-book" action="#terima-kasih" method="get">
-                <h4>Formulir Pendaftaran Siswa Baru</h4>
-                <p class="kop">Tahun Ajaran 2026/2027</p>
-
-                <fieldset>
-                    <legend>Data Calon Siswa</legend>
-
-                    <div class="field full">
-                        <label for="namaSiswa">Nama lengkap *</label>
-                        <input type="text" id="namaSiswa" name="namaSiswa" required>
-                    </div>
-
-                    <div class="row">
-                        <div class="field">
-                            <label for="tempatLahir">Tempat lahir *</label>
-                            <input type="text" id="tempatLahir" name="tempatLahir" required>
-                        </div>
-                        <div class="field">
-                            <label for="tanggalLahir">Tanggal lahir *</label>
-                            <input type="date" id="tanggalLahir" name="tanggalLahir" required>
-                        </div>
-                    </div>
-
-                    <div class="field full">
-                        <label>Jenis kelamin *</label>
-                        <div class="gender-options">
-                            <label><input type="radio" name="jenisKelamin" value="Laki-laki" required> Laki-laki</label>
-                            <label><input type="radio" name="jenisKelamin" value="Perempuan"> Perempuan</label>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="field">
-                            <label for="jenjang">Jenjang yang dituju *</label>
-                            <select id="jenjang" name="jenjang" required>
-                                <option value="" disabled selected>Pilih jenjang</option>
-                                <option value="SD">SD</option>
-                                <option value="SMP">SMP</option>
-                                <option value="SMA">SMA</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label for="asalSekolah">Asal sekolah</label>
-                            <input type="text" id="asalSekolah" name="asalSekolah">
-                        </div>
-                    </div>
-
-                    <div class="field full">
-                        <label for="alamat">Alamat tempat tinggal *</label>
-                        <textarea id="alamat" name="alamat" required></textarea>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Data Orang Tua / Wali</legend>
-
-                    <div class="row">
-                        <div class="field">
-                            <label for="namaWali">Nama orang tua / wali *</label>
-                            <input type="text" id="namaWali" name="namaWali" required>
-                        </div>
-                        <div class="field">
-                            <label for="teleponWali">No. telepon / WhatsApp *</label>
-                            <input type="tel" id="teleponWali" name="teleponWali" required>
-                        </div>
-                    </div>
-
-                    <div class="field full">
-                        <label for="emailWali">Email</label>
-                        <input type="email" id="emailWali" name="emailWali">
-                    </div>
-                </fieldset>
-
-                <div class="actions">
-                    <button type="submit">Kirim pendaftaran</button>
-                    <span class="required-note">* wajib diisi</span>
-                </div>
-            </form>
-
-            <div id="terima-kasih">
-                <h4>Pendaftaran terkirim</h4>
-                <p>Terima kasih, data pendaftaran Anda telah terkirim. Tim kami akan menghubungi nomor telepon yang tercantum untuk langkah selanjutnya.</p>
-            </div>
+            <a href="pendaftaran-sekolah.html" class="btn-primary">Isi formulir pendaftaran</a>
         </div>
     </section>
 
@@ -759,7 +520,7 @@
             <div>
                 <h5>Tautan</h5>
                 <a href="#jenjang">Jenjang pendidikan</a>
-                <a href="#daftar">Formulir pendaftaran</a>
+                <a href="pendaftaran-sekolah.html">Formulir pendaftaran</a>
             </div>
         </div>
         <div class="wrap footer-bottom">
