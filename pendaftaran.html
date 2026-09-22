@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulir Pendaftaran — SMA Nusantara Harapan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Zilla+Slab:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =============================================================
+     DESAIN BERSAMA — JANGAN DIUBAH SENDIRI-SENDIRI
+     Blok ini (variabel, reset, header, footer, komponen umum)
+     harus SAMA PERSIS di ketiga file: index.html, pendaftaran.html,
+     informasi.html. Kalau salah satu anggota perlu mengubahnya,
+     diskusikan dulu lalu salin ulang ke 3 file.
+     ============================================================= */
+  :root{
+    --color-bg:#F4F6F5;
+    --color-surface:#FFFFFF;
+    --color-surface-soft:#EFF2F0;
+    --color-ink:#1C2321;
+    --color-ink-soft:#4A5451;
+    --color-primary:#1F3B57;
+    --color-primary-dark:#142A3E;
+    --color-accent:#D68C21;
+    --color-line:#C9D2CD;
+    --font-display:'Zilla Slab', Georgia, serif;
+    --font-body:'Karla', Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    color:var(--color-ink);
+    background:var(--color-bg);
+    line-height:1.6;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{font-family:var(--font-display); margin:0 0 .5em; line-height:1.15; font-weight:700;}
+  p{margin:0 0 1em; max-width:65ch;}
+  .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+  .tab-chip{
+    display:inline-block;
+    padding:6px 14px;
+    background:var(--color-surface-soft);
+    border:1px solid var(--color-line);
+    border-bottom:2px solid var(--color-accent);
+    border-radius:6px 6px 0 0;
+    font-size:.85rem;
+    font-weight:600;
+    color:var(--color-primary-dark);
+    margin-bottom:16px;
+  }
+
+  .btn{display:inline-block;padding:12px 24px;border-radius:8px;font-weight:600;font-size:.95rem;border:2px solid transparent;cursor:pointer;}
+  .btn-primary{background:var(--color-primary);color:#fff;}
+  .btn-primary:hover{background:var(--color-primary-dark);}
+  .btn-outline{border-color:var(--color-primary);color:var(--color-primary);background:transparent;}
+  .btn-outline:hover{background:var(--color-primary);color:#fff;}
+
+  /* Header / navigasi bergaya "tab folder" */
+  .site-header{border-bottom:2px solid var(--color-primary); background:var(--color-surface); position:sticky; top:0; z-index:10;}
+  .header-inner{display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:12px; padding-top:18px;}
+  .brand{display:flex; align-items:center; gap:10px; padding-bottom:14px;}
+  .brand-mark{width:38px;height:38px;border-radius:50%;background:var(--color-primary);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;flex-shrink:0;}
+  .brand-name{font-family:var(--font-display);font-weight:700;font-size:1.05rem;}
+  .nav-tabs{display:flex;gap:4px;flex-wrap:wrap;}
+  .nav-tabs a{
+    padding:10px 16px;
+    font-size:.92rem;
+    font-weight:600;
+    border:1px solid var(--color-line);
+    border-bottom:none;
+    border-radius:8px 8px 0 0;
+    background:var(--color-surface-soft);
+    position:relative;
+    top:2px;
+  }
+  .nav-tabs a.active{background:var(--color-primary); color:#fff; border-color:var(--color-primary);}
+  .nav-tabs a:not(.active):hover{background:#fff;}
+
+  /* Footer */
+  .site-footer{border-top:1px dashed var(--color-line); margin-top:80px; padding:32px 0; background:var(--color-surface-soft);}
+  .footer-inner{display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between;}
+  .footer-brand{font-family:var(--font-display); font-weight:700; margin-bottom:4px;}
+  .footer-inner p{margin:0 0 4px; font-size:.92rem; color:var(--color-ink-soft);}
+
+  /* =============================================================
+     DESAIN HALAMAN INI SAJA — pendaftaran.html (Formulir)
+     Anggota 2 bebas mengubah bagian di bawah ini.
+     ============================================================= */
+  .page-intro{padding:48px 0 8px;}
+  .page-intro p{max-width:70ch;}
+  .notice{
+    background:var(--color-surface-soft);
+    border:1px dashed var(--color-line);
+    border-radius:8px;
+    padding:14px 18px;
+    font-size:.88rem;
+    color:var(--color-ink-soft);
+    max-width:70ch;
+  }
+
+  .form-wrap{padding:32px 0 72px;}
+  fieldset{
+    border:1px solid var(--color-line);
+    border-radius:0 12px 12px 12px;
+    padding:32px;
+    margin:0 0 32px;
+    background:var(--color-surface);
+  }
+  legend{
+    padding:7px 16px;
+    background:var(--color-primary);
+    color:#fff;
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:1.02rem;
+    border-radius:8px 8px 0 0;
+    margin-left:-1px;
+  }
+
+  .field{margin-bottom:22px;}
+  .field:last-child{margin-bottom:0;}
+  .field label{display:block;font-weight:600;margin-bottom:6px;font-size:.92rem;}
+  .field .hint{display:block;font-weight:400;font-size:.8rem;color:var(--color-ink-soft);margin-top:4px;}
+
+  .field input[type=text],
+  .field input[type=email],
+  .field input[type=tel],
+  .field input[type=date],
+  .field select,
+  .field textarea{
+    width:100%;
+    padding:10px 4px;
+    border:none;
+    border-bottom:1px dashed var(--color-line);
+    background:transparent;
+    font-family:var(--font-body);
+    font-size:1rem;
+    color:var(--color-ink);
+  }
+  .field select{padding:10px 0;}
+  .field textarea{resize:vertical;min-height:80px;}
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus{
+    outline:none;
+    border-bottom:2px solid var(--color-primary);
+  }
+
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .field-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;}
+
+  .radio-group{display:flex;gap:24px;flex-wrap:wrap;padding-top:6px;}
+  .radio-option{display:flex;align-items:center;gap:8px;font-weight:400;font-size:.95rem;}
+  .radio-option input{accent-color:var(--color-primary);width:16px;height:16px;}
+
+  .file-upload{
+    border:1px dashed var(--color-line);
+    border-radius:8px;
+    padding:16px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    background:var(--color-surface-soft);
+  }
+  .file-upload input[type=file]{font-family:var(--font-body);font-size:.88rem;}
+
+  .consent{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:.9rem;
+    color:var(--color-ink-soft);
+    margin-bottom:24px;
+  }
+  .consent input{margin-top:4px;accent-color:var(--color-primary);width:16px;height:16px;flex-shrink:0;}
+
+  .submit-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+
+  @media(max-width:700px){
+    .field-row, .field-row-3{grid-template-columns:1fr;}
+    fieldset{padding:22px;}
+  }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">SM</span>
+        <span class="brand-name">SMA Nusantara Harapan</span>
+      </a>
+      <nav class="nav-tabs" aria-label="Navigasi utama">
+        <a href="index.html">Beranda</a>
+        <a href="pendaftaran.html" class="active">Formulir Pendaftaran</a>
+        <a href="informasi.html">Informasi &amp; Kontak</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-intro">
+      <div class="container">
+        <span class="tab-chip">Tahun ajaran 2026/2027</span>
+        <h1>Formulir pendaftaran siswa baru</h1>
+        <p>Isi seluruh data di bawah ini dengan benar. Siapkan dokumen pendukung dalam format PDF atau gambar sebelum mengunggah berkas.</p>
+        <p class="notice">Catatan: formulir ini adalah tampilan statis (HTML &amp; CSS saja), belum terhubung ke server atau basis data. Tombol kirim belum memproses data sungguhan.</p>
+      </div>
+    </section>
+
+    <section class="form-wrap">
+      <div class="container">
+        <form>
+
+          <fieldset>
+            <legend>Data calon siswa</legend>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="nama">Nama lengkap</label>
+                <input type="text" id="nama" name="nama" placeholder="Sesuai akta kelahiran" required>
+              </div>
+              <div class="field">
+                <label for="nisn">NISN</label>
+                <input type="text" id="nisn" name="nisn" placeholder="10 digit">
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="tempat_lahir">Tempat lahir</label>
+                <input type="text" id="tempat_lahir" name="tempat_lahir">
+              </div>
+              <div class="field">
+                <label for="tanggal_lahir">Tanggal lahir</label>
+                <input type="date" id="tanggal_lahir" name="tanggal_lahir">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Jenis kelamin</label>
+              <div class="radio-group">
+                <label class="radio-option"><input type="radio" name="gender" value="L"> Laki-laki</label>
+                <label class="radio-option"><input type="radio" name="gender" value="P"> Perempuan</label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="alamat">Alamat tempat tinggal</label>
+              <textarea id="alamat" name="alamat" rows="2"></textarea>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="jurusan">Pilihan jurusan</label>
+                <select id="jurusan" name="jurusan">
+                  <option value="">Pilih salah satu</option>
+                  <option value="mipa">MIPA</option>
+                  <option value="ips">IPS</option>
+                  <option value="bahasa">Bahasa</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="hp_siswa">Nomor HP aktif</label>
+                <input type="tel" id="hp_siswa" name="hp_siswa" placeholder="08xxxxxxxxxx">
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Data orang tua / wali</legend>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="nama_ortu">Nama orang tua / wali</label>
+                <input type="text" id="nama_ortu" name="nama_ortu">
+              </div>
+              <div class="field">
+                <label for="pekerjaan_ortu">Pekerjaan</label>
+                <input type="text" id="pekerjaan_ortu" name="pekerjaan_ortu">
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="hp_ortu">Nomor HP orang tua / wali</label>
+                <input type="tel" id="hp_ortu" name="hp_ortu" placeholder="08xxxxxxxxxx">
+              </div>
+              <div class="field">
+                <label for="email_ortu">Email (opsional)</label>
+                <input type="email" id="email_ortu" name="email_ortu">
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Sekolah asal &amp; dokumen</legend>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="asal_sekolah">Nama sekolah asal</label>
+                <input type="text" id="asal_sekolah" name="asal_sekolah">
+              </div>
+              <div class="field">
+                <label for="tahun_lulus">Tahun lulus</label>
+                <input type="text" id="tahun_lulus" name="tahun_lulus" placeholder="2026">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="ijazah">Unggah ijazah / SKL</label>
+              <div class="file-upload">
+                <input type="file" id="ijazah" name="ijazah">
+              </div>
+              <span class="hint">Format PDF atau JPG, maksimal 2 MB.</span>
+            </div>
+
+            <div class="field">
+              <label for="kk">Unggah kartu keluarga</label>
+              <div class="file-upload">
+                <input type="file" id="kk" name="kk">
+              </div>
+              <span class="hint">Format PDF atau JPG, maksimal 2 MB.</span>
+            </div>
+          </fieldset>
+
+          <label class="consent">
+            <input type="checkbox" required>
+            Saya menyatakan bahwa seluruh data yang diisi pada formulir ini benar dan dapat dipertanggungjawabkan.
+          </label>
+
+          <div class="submit-row">
+            <button type="submit" class="btn btn-primary">Kirim pendaftaran</button>
+            <a href="informasi.html" class="btn btn-outline">Cek syarat sebelum kirim</a>
+          </div>
+
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-brand">SMA Nusantara Harapan</p>
+        <p>Jl. Pendidikan No. 45, Semarang, Jawa Tengah</p>
+      </div>
+      <div>
+        <p>(024) 123-4567</p>
+        <p>ppdb@nusantaraharapan.sch.id</p>
+      </div>
+      <div>
+        <p>&copy; 2026 SMA Nusantara Harapan. Seluruh hak cipta dilindungi.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
