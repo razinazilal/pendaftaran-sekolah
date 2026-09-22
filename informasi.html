@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informasi & Kontak — SMA Nusantara Harapan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Zilla+Slab:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =============================================================
+     DESAIN BERSAMA — JANGAN DIUBAH SENDIRI-SENDIRI
+     Blok ini (variabel, reset, header, footer, komponen umum)
+     harus SAMA PERSIS di ketiga file: index.html, pendaftaran.html,
+     informasi.html. Kalau salah satu anggota perlu mengubahnya,
+     diskusikan dulu lalu salin ulang ke 3 file.
+     ============================================================= */
+  :root{
+    --color-bg:#F4F6F5;
+    --color-surface:#FFFFFF;
+    --color-surface-soft:#EFF2F0;
+    --color-ink:#1C2321;
+    --color-ink-soft:#4A5451;
+    --color-primary:#1F3B57;
+    --color-primary-dark:#142A3E;
+    --color-accent:#D68C21;
+    --color-line:#C9D2CD;
+    --font-display:'Zilla Slab', Georgia, serif;
+    --font-body:'Karla', Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    color:var(--color-ink);
+    background:var(--color-bg);
+    line-height:1.6;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{font-family:var(--font-display); margin:0 0 .5em; line-height:1.15; font-weight:700;}
+  p{margin:0 0 1em; max-width:65ch;}
+  .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+  .tab-chip{
+    display:inline-block;
+    padding:6px 14px;
+    background:var(--color-surface-soft);
+    border:1px solid var(--color-line);
+    border-bottom:2px solid var(--color-accent);
+    border-radius:6px 6px 0 0;
+    font-size:.85rem;
+    font-weight:600;
+    color:var(--color-primary-dark);
+    margin-bottom:16px;
+  }
+
+  .btn{display:inline-block;padding:12px 24px;border-radius:8px;font-weight:600;font-size:.95rem;border:2px solid transparent;cursor:pointer;}
+  .btn-primary{background:var(--color-primary);color:#fff;}
+  .btn-primary:hover{background:var(--color-primary-dark);}
+  .btn-outline{border-color:var(--color-primary);color:var(--color-primary);background:transparent;}
+  .btn-outline:hover{background:var(--color-primary);color:#fff;}
+
+  /* Header / navigasi bergaya "tab folder" */
+  .site-header{border-bottom:2px solid var(--color-primary); background:var(--color-surface); position:sticky; top:0; z-index:10;}
+  .header-inner{display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:12px; padding-top:18px;}
+  .brand{display:flex; align-items:center; gap:10px; padding-bottom:14px;}
+  .brand-mark{width:38px;height:38px;border-radius:50%;background:var(--color-primary);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;flex-shrink:0;}
+  .brand-name{font-family:var(--font-display);font-weight:700;font-size:1.05rem;}
+  .nav-tabs{display:flex;gap:4px;flex-wrap:wrap;}
+  .nav-tabs a{
+    padding:10px 16px;
+    font-size:.92rem;
+    font-weight:600;
+    border:1px solid var(--color-line);
+    border-bottom:none;
+    border-radius:8px 8px 0 0;
+    background:var(--color-surface-soft);
+    position:relative;
+    top:2px;
+  }
+  .nav-tabs a.active{background:var(--color-primary); color:#fff; border-color:var(--color-primary);}
+  .nav-tabs a:not(.active):hover{background:#fff;}
+
+  /* Footer */
+  .site-footer{border-top:1px dashed var(--color-line); margin-top:80px; padding:32px 0; background:var(--color-surface-soft);}
+  .footer-inner{display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between;}
+  .footer-brand{font-family:var(--font-display); font-weight:700; margin-bottom:4px;}
+  .footer-inner p{margin:0 0 4px; font-size:.92rem; color:var(--color-ink-soft);}
+
+  /* =============================================================
+     DESAIN HALAMAN INI SAJA — informasi.html
+     Anggota 3 bebas mengubah bagian di bawah ini.
+     ============================================================= */
+  .page-intro{padding:48px 0 16px;}
+
+  section.block{padding:32px 0;}
+  section.block h2{max-width:34ch;}
+
+  /* Syarat pendaftaran */
+  .checklist{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px 32px;}
+  .checklist li{position:relative;padding-left:30px;font-size:.96rem;}
+  .checklist li::before{
+    content:"";
+    position:absolute;left:0;top:3px;
+    width:16px;height:16px;
+    border:2px solid var(--color-primary);
+    border-radius:3px;
+  }
+
+  /* Jadwal / alur — sequence yang sah untuk penomoran */
+  .timeline{margin-top:32px;border-left:2px dashed var(--color-line);padding-left:0;}
+  .timeline-item{list-style:none;position:relative;padding:0 0 32px 36px;}
+  .timeline-item:last-child{padding-bottom:0;}
+  .timeline-item::before{
+    content:attr(data-step);
+    position:absolute;left:-19px;top:0;
+    width:36px;height:36px;
+    background:var(--color-primary);
+    color:#fff;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-weight:700;font-size:.95rem;
+  }
+  .timeline-item h3{font-size:1.05rem;margin-bottom:2px;}
+  .timeline-item .date{font-size:.85rem;color:var(--color-ink-soft);display:block;margin-bottom:6px;}
+  .timeline-item p{margin-bottom:0;font-size:.94rem;}
+
+  /* Biaya */
+  table.fee-table{width:100%;border-collapse:collapse;margin-top:24px;background:var(--color-surface);}
+  table.fee-table th, table.fee-table td{text-align:left;padding:14px 16px;border-bottom:1px dashed var(--color-line);}
+  table.fee-table th{font-family:var(--font-display);font-weight:700;background:var(--color-surface-soft);}
+  table.fee-table td.amount{text-align:right;font-weight:600;color:var(--color-primary-dark);}
+
+  /* FAQ pakai <details>/<summary> — tanpa JavaScript */
+  .faq-item{
+    background:var(--color-surface);
+    border:1px solid var(--color-line);
+    border-radius:8px;
+    padding:6px 20px;
+    margin-bottom:12px;
+  }
+  .faq-item summary{
+    cursor:pointer;
+    padding:14px 0;
+    font-weight:600;
+    list-style:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+";font-size:1.3rem;color:var(--color-accent);font-weight:700;}
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item p{padding-bottom:16px;margin-bottom:0;color:var(--color-ink-soft);font-size:.94rem;}
+
+  /* Kontak & lokasi */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:24px;align-items:start;}
+  .contact-list{list-style:none;margin:0;padding:0;}
+  .contact-list li{display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed var(--color-line);}
+  .contact-list li:first-child{padding-top:0;}
+  .contact-list .label{width:110px;flex-shrink:0;font-weight:600;font-size:.9rem;color:var(--color-ink-soft);}
+  .map-card{
+    background:var(--color-surface);
+    border:1px dashed var(--color-line);
+    border-radius:4px 14px 14px 14px;
+    padding:28px;
+    min-height:220px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:var(--color-ink-soft);
+  }
+  .map-pin{
+    width:34px;height:34px;
+    border-radius:50% 50% 50% 0;
+    background:var(--color-accent);
+    transform:rotate(-45deg);
+    margin-bottom:20px;
+  }
+
+  @media(max-width:800px){
+    .checklist{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">SM</span>
+        <span class="brand-name">SMA Nusantara Harapan</span>
+      </a>
+      <nav class="nav-tabs" aria-label="Navigasi utama">
+        <a href="index.html">Beranda</a>
+        <a href="pendaftaran.html">Formulir Pendaftaran</a>
+        <a href="informasi.html" class="active">Informasi &amp; Kontak</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-intro">
+      <div class="container">
+        <span class="tab-chip">Panduan pendaftaran</span>
+        <h1>Syarat, jadwal, biaya, dan cara menghubungi kami</h1>
+        <p>Baca bagian ini sebelum mengisi formulir pendaftaran agar berkas kamu tidak perlu diunggah ulang.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="container">
+        <h2>Syarat pendaftaran</h2>
+        <ul class="checklist">
+          <li>Fotokopi akta kelahiran</li>
+          <li>Fotokopi kartu keluarga</li>
+          <li>Ijazah atau Surat Keterangan Lulus (SKL)</li>
+          <li>Pas foto berwarna terbaru 3x4 (2 lembar)</li>
+          <li>Fotokopi rapor kelas terakhir</li>
+          <li>Surat keterangan sehat dari puskesmas/dokter</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="container">
+        <h2>Jadwal dan alur pendaftaran</h2>
+        <ul class="timeline">
+          <li class="timeline-item" data-step="1">
+            <h3>Pendaftaran online</h3>
+            <span class="date">1 – 28 Februari 2027</span>
+            <p>Isi formulir pendaftaran dan unggah seluruh dokumen yang diminta.</p>
+          </li>
+          <li class="timeline-item" data-step="2">
+            <h3>Verifikasi berkas</h3>
+            <span class="date">1 – 5 Maret 2027</span>
+            <p>Tim admisi memeriksa kelengkapan dan keabsahan dokumen yang dikirim.</p>
+          </li>
+          <li class="timeline-item" data-step="3">
+            <h3>Tes seleksi</h3>
+            <span class="date">8 – 10 Maret 2027</span>
+            <p>Tes akademik dan wawancara singkat, dilaksanakan di lokasi sekolah.</p>
+          </li>
+          <li class="timeline-item" data-step="4">
+            <h3>Pengumuman hasil</h3>
+            <span class="date">15 Maret 2027</span>
+            <p>Hasil seleksi diumumkan melalui email dan nomor HP yang terdaftar.</p>
+          </li>
+          <li class="timeline-item" data-step="5">
+            <h3>Daftar ulang</h3>
+            <span class="date">16 – 20 Maret 2027</span>
+            <p>Siswa yang diterima melakukan daftar ulang dan pembayaran administrasi.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="container">
+        <h2>Biaya pendaftaran</h2>
+        <table class="fee-table">
+          <thead>
+            <tr><th>Komponen</th><th>Keterangan</th><th>Biaya</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Formulir pendaftaran</td><td>Gelombang 1</td><td class="amount">Gratis</td></tr>
+            <tr><td>Tes seleksi</td><td>Sekali tes, tidak dapat diulang</td><td class="amount">Rp 50.000</td></tr>
+            <tr><td>Daftar ulang</td><td>Dibayarkan setelah dinyatakan diterima</td><td class="amount">Rp 1.500.000</td></tr>
+            <tr><td>Seragam &amp; buku</td><td>Opsional, dapat dicicil</td><td class="amount">Rp 900.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="container">
+        <h2>Pertanyaan yang sering diajukan</h2>
+
+        <details class="faq-item">
+          <summary>Apakah pendaftaran gelombang pertama dikenakan biaya?</summary>
+          <p>Tidak. Formulir pendaftaran gelombang pertama sepenuhnya gratis. Biaya baru berlaku saat tes seleksi dan daftar ulang.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Bagaimana jika dokumen belum lengkap saat mendaftar?</summary>
+          <p>Formulir tetap bisa dikirim, tetapi verifikasi baru dilanjutkan setelah seluruh dokumen wajib diterima paling lambat 5 Maret 2027.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Apakah ada jalur khusus prestasi?</summary>
+          <p>Ada. Calon siswa dengan prestasi akademik atau non-akademik dapat melampirkan sertifikat pendukung pada saat verifikasi berkas.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Bisakah orang tua mendampingi saat tes seleksi?</summary>
+          <p>Orang tua dapat menunggu di area yang disediakan, namun tes dan wawancara dilakukan langsung dengan calon siswa.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="container">
+        <h2>Kontak &amp; lokasi</h2>
+        <div class="contact-grid">
+          <ul class="contact-list">
+            <li><span class="label">Alamat</span><span>Jl. Pendidikan No. 45, Semarang, Jawa Tengah 50241</span></li>
+            <li><span class="label">Telepon</span><span>(024) 123-4567</span></li>
+            <li><span class="label">Email</span><span>ppdb@nusantaraharapan.sch.id</span></li>
+            <li><span class="label">Jam layanan</span><span>Senin – Jumat, 08.00 – 15.00 WIB</span></li>
+          </ul>
+          <div class="map-card" aria-hidden="true">
+            <div class="map-pin"></div>
+            <p>Peta lokasi menyusul di sini setelah alamat resmi dikonfirmasi.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-brand">SMA Nusantara Harapan</p>
+        <p>Jl. Pendidikan No. 45, Semarang, Jawa Tengah</p>
+      </div>
+      <div>
+        <p>(024) 123-4567</p>
+        <p>ppdb@nusantaraharapan.sch.id</p>
+      </div>
+      <div>
+        <p>&copy; 2026 SMA Nusantara Harapan. Seluruh hak cipta dilindungi.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
